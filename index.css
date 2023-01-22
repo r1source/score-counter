@@ -1,0 +1,80 @@
+body {
+  background-color: rgba(78, 48, 104, 255);
+}
+
+.pTitle,
+.pScore {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 20px;
+}
+
+.label-parade {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.list-group-checkable .list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item-check {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+
+.modal-title {
+  margin-bottom: 0;
+  line-height: var(--bs-modal-title-line-height);
+  padding-left: 5px;
+}
+
+.list-group-item-check:checked + .list-group-item {
+  color: rgb(226, 222, 222);
+  background-color: rgb(138, 131, 131);
+}
+
+.list-group-item-check + .list-group-item {
+  color: rgb(243, 236, 236);
+  background-color: rgba(148, 144, 144, 0.575);
+}
+
+/* Size and Dice colors */
+
+.icon-large {
+  font-size: 20px;
+}
+
+.icon-green {
+  color: green;
+  padding-left: 2px;
+}
+
+.icon-red {
+  color: red;
+  padding-left: 2px;
+}
+
+.icon-blue {
+  color: blue;
+  padding-left: 2px;
+}
+
+.icon-yellow {
+  color: yellow;
+  padding-left: 2px;
+}
+
+.icon-orange {
+  color: orange;
+  padding-left: 2px;
+}
+
+.icon-purple {
+  color: purple;
+  padding-left: 2px;
+}
+
+.icon-gray {
+  color: gray;
+  padding-left: 2px;
+}

@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pontuação</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="index.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+  </head>
+  <body>
+  <div class="container">
+      <div class="py-3 text-center">
+        <h1 class="pTitle">Grupo</h1>
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="btnradio" id="btnradioD" data-group="D" autocomplete="off">
+          <label class="btn btn-outline-light" for="btnradioD">D</label>
+        
+          <input type="radio" class="btn-check" name="btnradio" id="btnradioC" data-group="C" autocomplete="off">
+          <label class="btn btn-outline-light" for="btnradioC">C</label>
+        
+          <input type="radio" class="btn-check" name="btnradio" id="btnradioB" data-group="B" autocomplete="off">
+          <label class="btn btn-outline-light" for="btnradioB">B</label>
+
+          <input type="radio" class="btn-check" name="btnradio" id="btnradioA" data-group="A" autocomplete="off">
+          <label class="btn btn-outline-light" for="btnradioA">A</label>
+
+          <input type="radio" class="btn-check" name="btnradio" id="btnradioS" data-group="S" autocomplete="off">
+          <label class="btn btn-outline-light" for="btnradioS">S</label>
+        </div>
+      </div>
+      <div class="row g-5">
+        <div class="d-flex gap-5 justify-content-center">    
+          <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
+
+            <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios1" value="1" data-value="bi bi-1-circle icon-large" data-parade="parade1" data-bs-toggle="modal" data-bs-target="#dicePickerModal">
+            <label id="parade1" class="list-group-item rounded-3 py-3 label-parade grid-border" for="listGroupCheckableRadios1">
+              <i class="bi bi-1-circle icon-large"></i>
+              Comissão de Frente
+              <i id="parade1dice1" class=''></i>
+              <i id="parade1dice2" class=''></i>
+              <i id="parade1dice3" class=''></i>
+              <i id="parade1dice4" class=''></i>
+              <i id="parade1score" class="bi bi-flag-fill" style="display:none"></i>
+            </label>
+
+            <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios2" value="2" data-value="bi bi-2-circle icon-large" data-parade="parade2" data-bs-toggle="modal" data-bs-target="#dicePickerModal">
+            <label id="parade2" class="list-group-item rounded-3 py-3 label-parade grid-border" for="listGroupCheckableRadios2">
+              <i class="bi bi-2-circle icon-large"></i>
+              Mestre Sala
+              <i id="parade2dice1" class=''></i>
+              <i id="parade2dice2" class=''></i>
+              <i id="parade2dice3" class=''></i>
+              <i id="parade2dice4" class=''></i>
+			        <i id="parade2score" class="bi bi-flag-fill" style="display:none"></i>
+            </label>
+
+            <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios3" value="3" data-value="bi bi-3-circle icon-large" data-parade="parade3" data-bs-toggle="modal" data-bs-target="#dicePickerModal">
+            <label id="parade3" class="list-group-item rounded-3 py-3 label-parade grid-border" for="listGroupCheckableRadios3">
+              <i class="bi bi-3-circle icon-large"></i>
+              Enredo
+              <i id="parade3dice1" class=''></i>
+              <i id="parade3dice2" class=''></i>
+              <i id="parade3dice3" class=''></i>
+              <i id="parade3dice4" class=''></i>
+			        <i id="parade3score" class="bi bi-flag-fill" style="display:none"></i>
+            </label>
+            
+            <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios4" value="4" data-value="bi bi-4-circle icon-large" data-parade="parade4" data-bs-toggle="modal" data-bs-target="#dicePickerModal">
+            <label id="parade4" class="list-group-item rounded-3 py-3 label-parade grid-border" for="listGroupCheckableRadios4">
+              <i class="bi bi-4-circle icon-large"></i>
+              Alegoria & Adereços
+              <i id="parade4dice1" class=''></i>
+              <i id="parade4dice2" class=''></i>
+              <i id="parade4dice3" class=''></i>
+              <i id="parade4dice4" class=''></i>
+			        <i id="parade4score" class="bi bi-flag-fill" style="display:none"></i>
+            </label>
+
+            <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios5" value="5" data-value="bi bi-5-circle icon-large" data-parade="parade5" data-bs-toggle="modal" data-bs-target="#dicePickerModal">
+            <label id="parade5" class="list-group-item rounded-3 py-3 label-parade grid-border" for="listGroupCheckableRadios5">
+              <i class="bi bi-5-circle icon-large"></i>
+              Fantasias
+              <i id="parade5dice1" class=''></i>
+              <i id="parade5dice2" class=''></i>
+              <i id="parade5dice3" class=''></i>
+              <i id="parade5dice4" class=''></i>
+			        <i id="parade5score" class="bi bi-flag-fill" style="display:none"></i>
+            </label>
+
+            <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios6" value="6" data-value="bi bi-6-circle icon-large" data-parade="parade6" data-bs-toggle="modal" data-bs-target="#dicePickerModal">
+            <label id="parade6" class="list-group-item rounded-3 py-3 label-parade grid-border" for="listGroupCheckableRadios6">
+              <i class="bi bi-6-circle icon-large"></i>
+              Harmonia
+              <i id="parade6dice1" class=''></i>
+              <i id="parade6dice2" class=''></i>
+              <i id="parade6dice3" class=''></i>
+              <i id="parade6dice4" class=''></i>
+			        <i id="parade6score" class="bi bi-flag-fill" style="display:none"></i>
+            </label>
+
+            <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios7" value="7" data-value="bi bi-7-circle icon-large" data-parade="parade7" data-bs-toggle="modal" data-bs-target="#dicePickerModal">
+            <label id="parade7" class="list-group-item rounded-3 py-3 label-parade grid-border" for="listGroupCheckableRadios7">
+              <i class="bi bi-7-circle icon-large"></i>
+              Evolução
+              <i id="parade7dice1" class=''></i>
+              <i id="parade7dice2" class=''></i>
+              <i id="parade7dice3" class=''></i>
+              <i id="parade7dice4" class=''></i>
+			        <i id="parade7score" class="bi bi-flag-fill" style="display:none"></i>
+            </label>
+
+            <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios8" value="8" data-value="bi bi-8-circle icon-large" data-parade="parade8" data-bs-toggle="modal" data-bs-target="#dicePickerModal">
+            <label id="parade8" class="list-group-item rounded-3 py-3 label-parade grid-border" for="listGroupCheckableRadios8">
+              <i class="bi bi-8-circle icon-large"></i>
+              Bateria
+              <i id="parade8dice1" class=''></i>
+              <i id="parade8dice2" class=''></i>
+              <i id="parade8dice3" class=''></i>
+              <i id="parade8dice4" class=''></i>
+			        <i id="parade8score" class="bi bi-flag-fill" style="display:none"></i>
+            </label>
+
+            <input class="list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="listGroupCheckableRadios9" value="9" data-value="bi bi-9-circle icon-large" data-parade="parade9" data-bs-toggle="modal" data-bs-target="#dicePickerModal">
+            <label id="parade9" class="list-group-item rounded-3 py-3 label-parade grid-border" for="listGroupCheckableRadios9">
+              <i class="bi bi-9-circle icon-large"></i>
+              Samba-Enredo
+              <i id="parade9dice1" class=''></i>
+              <i id="parade9dice2" class=''></i>
+              <i id="parade9dice3" class=''></i>
+              <i id="parade9dice4" class=''></i>
+			        <i id="parade9score" class="bi bi-flag-fill" style="display:none"></i>
+            </label>
+            <div class="text-center">
+              <button type="button" class="btn btn-danger" id="resetParade">Reset</button>	   
+		          <i id="totalscore" class="bi bi-flag-fill icon-large" style="display:none"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="dicePickerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <i id="modalIconNumber"></i>
+          <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <p>Marque um dado por vez:</p>
+            <div class="btn-group">
+              <button type="button" id="dice1" data-order="0" class="btn btn-outline-secondary dice">
+                <i class="bi bi-1-circle-fill"></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice2" data-order="1" class="btn btn-outline-secondary dice">
+                <i class="bi bi-2-circle-fill"></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice3" data-order="2" class="btn btn-outline-secondary dice">
+                <i class="bi bi-3-circle-fill"></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice4" data-order="3" class="btn btn-outline-secondary dice">
+                <i class="bi bi-4-circle-fill"></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="container">
+            <hr class="my-4">
+            <p>Escolha a numeração:</p>
+            <div class="btn-group">
+              <button type="button" id="dice1number" data-number="1" class="btn btn-outline-secondary diceNumber">
+                <i class='bi bi-dice-1-fill'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice2number" data-number="2" class="btn btn-outline-secondary diceNumber">
+                <i class='bi bi-dice-2-fill'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice3number" data-number="3" class="btn btn-outline-secondary diceNumber">
+                <i class='bi bi-dice-3-fill'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice4number" data-number="4" class="btn btn-outline-secondary diceNumber">
+                <i class='bi bi-dice-4-fill'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice5number" data-number="5" class="btn btn-outline-secondary diceNumber">
+                <i class='bi bi-dice-5-fill'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice6number" data-number="6" class="btn btn-outline-secondary diceNumber">
+                <i class='bi bi-dice-6-fill'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="container">
+            <hr class="my-4">
+            <p>Escolha a cor:</p>    
+            <div class="btn-group">
+              <button type="button" id="dice1color" data-color="green" class="btn btn-outline-secondary diceColor">
+                <i class='bi bi-square-fill icon-green'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice2color" data-color="blue" class="btn btn-outline-secondary diceColor">
+                <i class='bi bi-square-fill icon-blue'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice3color" data-color="yellow" class="btn btn-outline-secondary diceColor">
+                <i class='bi bi-square-fill icon-yellow'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice4color" data-color="purple" class="btn btn-outline-secondary diceColor">
+                <i class='bi bi-square-fill icon-purple'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice5color" data-color="red" class="btn btn-outline-secondary diceColor">
+                <i class='bi bi-square-fill icon-red'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" id="dice6color" data-color="orange" class="btn btn-outline-secondary diceColor">
+                <i class='bi bi-square-fill icon-orange'></i>
+                <span class="visually-hidden">Button</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.slim.js" integrity="sha256-DKU1CmJ8kBuEwumaLuh9Tl/6ZB6jzGOBV/5YpNE2BWc=" crossorigin="anonymous"></script>
+<script src="index.js"></script>
+</body>
+</html>
