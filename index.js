@@ -283,17 +283,17 @@ var game = {
     numberOfDiceFoundInAnotherParade
   ) {
     let found = 0;
-    let dicesParade3 = game.dicesFromSpecificParadeToArray(parade);
-    let arrayDicesFromAllParadesExcept3 = game.allDicesAsArray([parade]);
+    let dicesParade = game.dicesFromSpecificParadeToArray(parade);
+    let arrayDicesFromAllParadesExcept = game.allDicesAsArray([parade]);
     let arrayParadeIndexFounds = [];
 
-    dicesParade3.forEach((element) => {
+    dicesParade.forEach((element) => {
       for (
         let index = 0;
-        index < arrayDicesFromAllParadesExcept3.length;
+        index < arrayDicesFromAllParadesExcept.length;
         index++
       ) {
-        let elementIsPresent = arrayDicesFromAllParadesExcept3[index].find(
+        let elementIsPresent = arrayDicesFromAllParadesExcept[index].find(
           (item) => item.number == element.number && item.color == element.color
         );
         if (elementIsPresent && !arrayParadeIndexFounds.includes(index)) {
@@ -307,7 +307,7 @@ var game = {
     return found == numberOfDiceFoundInAnotherParade;
   },
   numberOrColorsDoesntAppearOnGame: function (parade) {
-    const arrayDicesFromAllParadesExcept9 = game.allDicesAsArray(["parade9"]);
+    const arrayDicesFromAllParadesExcept = game.allDicesAsArray([parade]);
     const arrayDicesColor = game.dicesColorsOfParadeToArray(parade);
 
     let ret = false;
@@ -315,7 +315,7 @@ var game = {
     for (let index = 0; index < arrayDicesColor.length; index++) {
       const element = arrayDicesColor[index];
       const appeared = colorAppearOnArray(
-        arrayDicesFromAllParadesExcept9,
+        arrayDicesFromAllParadesExcept,
         element
       );
       if (appeared) {
@@ -332,7 +332,7 @@ var game = {
       for (let index = 0; index < arrayDicesNumber.length; index++) {
         const element = arrayDicesNumber[index];
         const appeared = numberAppearOnArray(
-          arrayDicesFromAllParadesExcept9,
+          arrayDicesFromAllParadesExcept,
           element
         );
         if (appeared) {
@@ -344,6 +344,42 @@ var game = {
 
     //Coloque 4 dados com cores ou valores não presentes em nenhum outro quesito.
     return !ret;
+  },
+  calculateParade2MaxScore: function (parade) {
+    //Coloque 2 dados pares idênticos e 2 dados ímpares idênticos de uma segunda cor
+    let dicesParade = game.dicesFromSpecificParadeToArray(parade);
+    let arraySortedByNumber = sortByNumber(dicesParade);
+
+    let firstDiceGroupColorsAreEqual =
+      arraySortedByNumber[0].color === arraySortedByNumber[1].color;
+    let firstDiceGroupNumbersAreEqual =
+      arraySortedByNumber[0].number === arraySortedByNumber[1].number;
+    let firstDiceGroupNumberAreEvenOrOdd = numberIsEven(
+      arraySortedByNumber[0].number
+    );
+
+    let secondtDiceGroupColorsAreEqual =
+      arraySortedByNumber[2].color === arraySortedByNumber[3].color;
+    let secondDiceGroupNumbersAreEqual =
+      arraySortedByNumber[2].number === arraySortedByNumber[3].number;
+    let secondDiceGroupNumberAreEvenOrOdd = numberIsEven(
+      arraySortedByNumber[2].number
+    );
+
+    if (
+      firstDiceGroupColorsAreEqual &&
+      firstDiceGroupNumbersAreEqual &&
+      secondtDiceGroupColorsAreEqual &&
+      secondDiceGroupNumbersAreEqual &&
+      firstDiceGroupColorsAreEqual !== secondtDiceGroupColorsAreEqual &&
+      ((firstDiceGroupNumberAreEvenOrOdd &&
+        !secondDiceGroupNumberAreEvenOrOdd) ||
+        (!firstDiceGroupNumberAreEvenOrOdd &&
+          secondDiceGroupNumberAreEvenOrOdd))
+    ) {
+      return true;
+    }
+    return false;
   },
 };
 
@@ -358,10 +394,13 @@ function calculateMaxScores() {
   }
 
   //Coloque 2 dados pares idênticos e 2 dados ímpares idênticos de uma segunda cor
-  // if (game.allDicesParadeAreFill('parade2') &&) {
-  // game.setScore('parade2', MAX_SCORE);
-  // showScoreParade('parade2score', game.parade2.score);
-  // }
+  if (
+    game.allDicesParadeAreFill("parade2") &&
+    game.calculateParade2MaxScore("parade2")
+  ) {
+    game.setScore("parade2", MAX_SCORE);
+    showScoreParade("parade2score", game.parade2.score);
+  }
 
   //Coloque 4 dados diferentes que estejam presentes em 4 outros quesitos de seu tabuleiro.
   if (
@@ -700,6 +739,15 @@ function showScoreParade(parade, score) {
 
 function hideScoreParades() {
   $("[id^=parade][id$=score]").hide();
+  game.parade1.score = "";
+  game.parade2.score = "";
+  game.parade3.score = "";
+  game.parade4.score = "";
+  game.parade5.score = "";
+  game.parade6.score = "";
+  game.parade7.score = "";
+  game.parade8.score = "";
+  game.parade9.score = "";
 }
 
 $("#resetParade").click(function () {
