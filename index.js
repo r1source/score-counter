@@ -32,13 +32,39 @@ function numberAppearOnArray(array, number) {
   return array.some((val) => val.number === number);
 }
 
-function colorAppearOnArray(array, color) {
-  return array.some((val) => val.color === color);
+function numberAppearOnArrayOfArray(arr, number) {
+  let result = false;
+  arr.forEach((element) => {
+    element.forEach((prop) => {
+      if (prop.number === number) {
+        result = true;
+      }
+    });
+  });
+  return result;
 }
 
-function arrayIsSequential(array) {
-  array = array.sort();
-  return array.every((num, i) => i === array.length - 1 || num < array[i + 1]);
+function colorAppearOnArrayOfArray(arr, color) {
+  let result = false;
+  arr.forEach((element) => {
+    element.forEach((prop) => {
+      if (prop.color === color) {
+        result = true;
+      }
+    });
+  });
+  return result;
+}
+
+function arrayIsSequential(arr) {
+  arr = arr.sort();
+  let isSequential = true;
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] + 1 !== arr[i + 1]) {
+      isSequential = false;
+    }
+  }
+  return isSequential;
 }
 
 function paradeToArray(parade) {
@@ -76,6 +102,7 @@ var game = {
     dice4number: "",
     dice4color: "",
     score: "",
+    maxScore: false,
   },
   parade2: {
     dice1number: "",
@@ -87,6 +114,7 @@ var game = {
     dice4number: "",
     dice4color: "",
     score: "",
+    maxScore: false,
   },
   parade3: {
     dice1number: "",
@@ -98,6 +126,7 @@ var game = {
     dice4number: "",
     dice4color: "",
     score: "",
+    maxScore: false,
   },
   parade4: {
     dice1number: "",
@@ -109,6 +138,7 @@ var game = {
     dice4number: "",
     dice4color: "",
     score: "",
+    maxScore: false,
   },
   parade5: {
     dice1number: "",
@@ -120,6 +150,7 @@ var game = {
     dice4number: "",
     dice4color: "",
     score: "",
+    maxScore: false,
   },
   parade6: {
     dice1number: "",
@@ -131,6 +162,7 @@ var game = {
     dice4number: "",
     dice4color: "",
     score: "",
+    maxScore: false,
   },
   parade7: {
     dice1number: "",
@@ -142,6 +174,7 @@ var game = {
     dice4number: "",
     dice4color: "",
     score: "",
+    maxScore: false,
   },
   parade8: {
     dice1number: "",
@@ -153,6 +186,7 @@ var game = {
     dice4number: "",
     dice4color: "",
     score: "",
+    maxScore: false,
   },
   parade9: {
     dice1number: "",
@@ -164,6 +198,7 @@ var game = {
     dice4number: "",
     dice4color: "",
     score: "",
+    maxScore: false,
   },
   totalScore: function () {
     return (
@@ -194,11 +229,12 @@ var game = {
   paradeHasScore: function (parade) {
     return game[parade].score != "" || game[parade].score != MAX_SCORE;
   },
-  setScore: function (parade, score) {
+  setScore: function (parade, score, maxScore = false) {
     if (score > MAX_SCORE) {
       score = MAX_SCORE;
     }
     game[parade].score = score;
+    game[parade].maxScore = maxScore;
   },
   allDicesParadeAreFill: function (parade) {
     return (
@@ -314,7 +350,7 @@ var game = {
 
     for (let index = 0; index < arrayDicesColor.length; index++) {
       const element = arrayDicesColor[index];
-      const appeared = colorAppearOnArray(
+      const appeared = colorAppearOnArrayOfArray(
         arrayDicesFromAllParadesExcept,
         element
       );
@@ -331,7 +367,7 @@ var game = {
 
       for (let index = 0; index < arrayDicesNumber.length; index++) {
         const element = arrayDicesNumber[index];
-        const appeared = numberAppearOnArray(
+        const appeared = numberAppearOnArrayOfArray(
           arrayDicesFromAllParadesExcept,
           element
         );
@@ -358,7 +394,7 @@ var game = {
       arraySortedByNumber[0].number
     );
 
-    let secondtDiceGroupColorsAreEqual =
+    let secondDiceGroupColorsAreEqual =
       arraySortedByNumber[2].color === arraySortedByNumber[3].color;
     let secondDiceGroupNumbersAreEqual =
       arraySortedByNumber[2].number === arraySortedByNumber[3].number;
@@ -369,9 +405,9 @@ var game = {
     if (
       firstDiceGroupColorsAreEqual &&
       firstDiceGroupNumbersAreEqual &&
-      secondtDiceGroupColorsAreEqual &&
+      secondDiceGroupColorsAreEqual &&
       secondDiceGroupNumbersAreEqual &&
-      firstDiceGroupColorsAreEqual !== secondtDiceGroupColorsAreEqual &&
+      arraySortedByNumber[0].color !== arraySortedByNumber[2].color &&
       ((firstDiceGroupNumberAreEvenOrOdd &&
         !secondDiceGroupNumberAreEvenOrOdd) ||
         (!firstDiceGroupNumberAreEvenOrOdd &&
@@ -389,7 +425,7 @@ function calculateMaxScores() {
     game.allDicesColorsAreSameParade("parade1") &&
     numberIsBetween(game.sumOfDicesParade("parade1"), 10, 15)
   ) {
-    game.setScore("parade1", MAX_SCORE);
+    game.setScore("parade1", MAX_SCORE, true);
     showScoreParade("parade1score", game.parade1.score);
   }
 
@@ -398,7 +434,7 @@ function calculateMaxScores() {
     game.allDicesParadeAreFill("parade2") &&
     game.calculateParade2MaxScore("parade2")
   ) {
-    game.setScore("parade2", MAX_SCORE);
+    game.setScore("parade2", MAX_SCORE, true);
     showScoreParade("parade2score", game.parade2.score);
   }
 
@@ -406,12 +442,10 @@ function calculateMaxScores() {
   if (
     game.allDicesParadeAreFill("parade3") &&
     !arrayHasDuplicatesValues(game.dicesColorsOfParadeToArray("parade3")) &&
-    !arrayHasDuplicatesValues(
-      game.dicesNumbersOfParadeToArray("parade3") &&
-        game.checkIfDiceAppearAnotherParade("parade3", 4)
-    )
+    !arrayHasDuplicatesValues(game.dicesNumbersOfParadeToArray("parade3")) &&
+    game.checkIfDiceAppearAnotherParade("parade3", 4)
   ) {
-    game.setScore("parade3", MAX_SCORE);
+    game.setScore("parade3", MAX_SCORE, true);
     showScoreParade("parade3score", game.parade3.score);
   }
 
@@ -421,7 +455,7 @@ function calculateMaxScores() {
     !arrayHasDuplicatesValues(game.dicesColorsOfParadeToArray("parade4")) &&
     !arrayHasDuplicatesValues(game.dicesNumbersOfParadeToArray("parade4"))
   ) {
-    game.setScore("parade4", MAX_SCORE);
+    game.setScore("parade4", MAX_SCORE, true);
     showScoreParade("parade4score", game.parade4.score);
   }
 
@@ -433,7 +467,7 @@ function calculateMaxScores() {
       sortByNumber(game.dicesFromSpecificParadeToArray("parade5"))
     )
   ) {
-    game.setScore("parade5", MAX_SCORE);
+    game.setScore("parade5", MAX_SCORE, true);
     showScoreParade("parade5score", game.parade5.score);
   }
 
@@ -442,7 +476,7 @@ function calculateMaxScores() {
     game.allDicesParadeAreFill("parade6") &&
     arrayIsSequential(game.dicesNumbersOfParadeToArray("parade6"))
   ) {
-    game.setScore("parade6", MAX_SCORE);
+    game.setScore("parade6", MAX_SCORE, true);
     showScoreParade("parade6score", game.parade6.score);
   }
 
@@ -451,7 +485,7 @@ function calculateMaxScores() {
     game.allDicesColorsAreSameParade("parade7") &&
     game.allDicesNumbersAreSameParade("parade7")
   ) {
-    game.setScore("parade7", MAX_SCORE);
+    game.setScore("parade7", MAX_SCORE, true);
     showScoreParade("parade7score", game.parade7.score);
   }
 
@@ -461,7 +495,7 @@ function calculateMaxScores() {
     game.allDicesNumbersAreSameParade("parade8") &&
     game.diceNumberDoesntAppearOnParade("parade7", game.parade8.dice1number)
   ) {
-    game.setScore("parade8", MAX_SCORE);
+    game.setScore("parade8", MAX_SCORE, true);
     showScoreParade("parade8score", game.parade8.score);
   }
 
@@ -470,7 +504,7 @@ function calculateMaxScores() {
     game.allDicesParadeAreFill("parade9") &&
     game.numberOrColorsDoesntAppearOnGame("parade9")
   ) {
-    game.setScore("parade9", MAX_SCORE);
+    game.setScore("parade9", MAX_SCORE, true);
     showScoreParade("parade9score", game.parade9.score);
   }
 }
@@ -735,6 +769,10 @@ function showScoreParade(parade, score) {
   $("#" + parade)
     .text(score)
     .show();
+
+  if (game[parade.replace('score','')].maxScore) {
+    $("#" + parade + "-star").show();
+  }
 }
 
 function hideScoreParades() {
