@@ -227,7 +227,7 @@ var game = {
     );
   },
   paradeHasScore: function (parade) {
-    return game[parade].score != "" || game[parade].score != MAX_SCORE;
+    return game[parade].score != "";
   },
   setScore: function (parade, score, maxScore = false) {
     if (score > MAX_SCORE) {
@@ -417,6 +417,48 @@ var game = {
     }
     return false;
   },
+  checkSameColorsAppear3Times: function (obj) {
+    let colors = {};
+    let colorAppeared3Times = "";
+
+    for (let index = 1; index < 5; index++) {
+        // Get the color of the current property
+        let color = obj["dice"+ index +"color"];
+        // Check if there is a color that was already encountered
+        if (colors[color]) {
+          // Increase the count for that color
+          colors[color]++;
+        } else {
+          // Otherwise, add the color to the object and set the count to 1
+          colors[color] = 1;
+        }
+    }
+
+    // Loop through each color and check if the count is 3
+    for (let color in colors) {
+      if (colors[color] === 3) {
+        colorAppeared3Times = color;
+      }
+    }
+    return colorAppeared3Times;
+  },
+  sumDicesByColor: function(diceColors, color) {
+    let total = 0;
+  
+    // Loop through each dice
+    for (let index = 1; index < 5; index++) {
+      // Check if the current dice has the color we are looking for
+      let _color = diceColors["dice"+ index +"color"];
+      if (_color === color) {
+        // Add the value of the dice to the total
+        let _number = diceColors["dice"+ index +"number"];
+        total += _number;
+      }
+    }
+  
+    // Return the total value of the dices with the specified color
+    return total;
+  },
 };
 
 function calculateMaxScores() {
@@ -515,19 +557,22 @@ function calculateBonusScores() {
     let returnPointsBasedOnGroup = pointsBasedOnGroup(sumOfParade);
     let bonusPoints = 0;
 
-    // if(3 == 3 && numberIsBetween((game.sumOfDicesParade('parade1')), 10, 15)){
-    // bonusPoints = returnPointsBasedOnGroup + 3;
-    // }else if(game.allDicesColorsAreSameParade('parade1') && !numberIsBetween((game.sumOfDicesParade('parade1')), 10, 15){
-    // bonusPoints = returnPointsBasedOnGroup + 2;
-    // }else if(3 == 3 && !numberIsBetween((game.sumOfDicesParade('parade1')), 10, 15){
-    // bonusPoints = returnPointsBasedOnGroup + 1;
-    // }
+    let colorAppeared3Times = game.checkSameColorsAppear3Times(game.parade1);
 
     // 3 dados da mesma cor que somados dão um resultado de 10 a 15.
-    // 4 dados da mesma cor que somados não dão um resultado de 10 a 15.
-    // 3 dados da mesma cor que somados não dão um resultado de 10 a 15.
+    if(colorAppeared3Times != "" && numberIsBetween(game.sumDicesByColor(game.parade1, colorAppeared3Times), 10, 15)){
+    bonusPoints = returnPointsBasedOnGroup + 3;
 
+    //4 dados da mesma cor que somados não dão um resultado de 10 a 15.
+    }else if(game.allDicesColorsAreSameParade('parade1') && !numberIsBetween((game.sumOfDicesParade('parade1')), 10, 15)){
+    bonusPoints = returnPointsBasedOnGroup + 2;
+
+    //3 dados da mesma cor que somados não dão um resultado de 10 a 15.
+    }else if(colorAppeared3Times != "" && !numberIsBetween(game.sumDicesByColor(game.parade1, colorAppeared3Times), 10, 15)){
+    bonusPoints = returnPointsBasedOnGroup + 1;
+    }
     game.setScore("parade1", bonusPoints);
+    showScoreParade("parade1score", game.parade1.score);
   }
 
   if (!game.paradeHasScore("parade2")) {
@@ -540,6 +585,7 @@ function calculateBonusScores() {
     // 2 dados de uma cor e 2 dados de uma segunda cor, os valores não importam
 
     game.setScore("parade2", bonusPoints);
+    showScoreParade("parade2score", game.parade2.score);
   }
 
   if (!game.paradeHasScore("parade3")) {
@@ -552,6 +598,7 @@ function calculateBonusScores() {
     // 3 dados diferentes,presentes em 3 quesitos.
 
     game.setScore("parade3", bonusPoints);
+    showScoreParade("parade3score", game.parade3.score);
   }
 
   if (!game.paradeHasScore("parade4")) {
@@ -564,6 +611,7 @@ function calculateBonusScores() {
     // 3 dados com cores e valores diferentes.
 
     game.setScore("parade4", bonusPoints);
+    showScoreParade("parade4score", game.parade4.score);
   }
 
   if (!game.paradeHasScore("parade5")) {
@@ -576,6 +624,7 @@ function calculateBonusScores() {
     // 1 dado idêntico às Alegorias e Adereços.
 
     game.setScore("parade5", bonusPoints);
+    showScoreParade("parade5score", game.parade5.score);
   }
 
   if (!game.paradeHasScore("parade6")) {
@@ -588,6 +637,7 @@ function calculateBonusScores() {
     // 3 dados em ordem sequencial, usando 6 e 1 na sequência.
 
     game.setScore("parade6", bonusPoints);
+    showScoreParade("parade6score", game.parade6.score);
   }
 
   if (!game.paradeHasScore("parade7")) {
@@ -600,6 +650,7 @@ function calculateBonusScores() {
     // 2 dados idênticos
 
     game.setScore("parade7", bonusPoints);
+    showScoreParade("parade7score", game.parade7.score);
   }
 
   if (!game.paradeHasScore("parade8")) {
@@ -612,6 +663,7 @@ function calculateBonusScores() {
     // 2 dados de mesmo valor. Nenhum dos valores utilizados pode estar presente em Harmonia
 
     game.setScore("parade8", bonusPoints);
+    showScoreParade("parade8score", game.parade8.score);
   }
 
   if (!game.paradeHasScore("parade9")) {
@@ -624,6 +676,7 @@ function calculateBonusScores() {
     // 1 dado com cor ou valor não presente em nenhum outro quesito
 
     game.setScore("parade9", bonusPoints);
+    showScoreParade("parade9score", game.parade9.score);
   }
 }
 
