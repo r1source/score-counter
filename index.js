@@ -550,6 +550,18 @@ function calculateMaxScores() {
     showScoreParade("parade9score", game.parade9.score);
   }
 }
+/*
+TODO list
+Verificar se está maior que 0 para exibir na tela.
+
+Hide div de quesitos se não selecionar um grupo.
+
+Selecione um grupo:
+Alterar texto depois de selecionado para
+Grupo selecionado B
+
+criar unit tests
+*/
 
 function calculateBonusScores() {
   if (!game.paradeHasScore("parade1")) {
